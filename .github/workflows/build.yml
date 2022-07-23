@@ -1,40 +1,86 @@
 name: "Test Workflow"
 on:
   push:
+    branches:
+      - "master"
 
 jobs:
-  job-1:
-    name: "My First Job"
-    runs-on: ubuntu-latest
+  pipeline-builder:
+    name: "Build CI pipeline"
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: true
+      matrix:
+        component_name: ["Core", "ComponentA", "ComponentB"]
     steps:
-      - uses: actions/checkout@v3
+      - name: "Check the differences"
+        shell: pwsh
+        # Give an id to the step, so we can reference it later
+        id: check_file_changed
+        run: |
+          # Diff HEAD with the previous commit
+          $diff = git diff --name-only HEAD^ HEAD
 
-      - uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "6.x"
+          # Check if a file under component name folder changed
+          $SourceDiff = $diff | Where-Object { $_ -match '^src/${{ matrix.component_name }}/'}
+          $HasDiff = $SourceDiff.Length -gt 0
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          # Look to see if there is a cache hit for the corresponding requirements file
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget
+          # Set the output named "docs_changed"
+          Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
 
-      - name: "Restore packages"
-        run: dotnet restore ./src/workflow-sandbox.sln -v n
+    outputs:
+    {
+      "core_changed": jobs.pipeline-builder.outputs.component_Core,
+      "componenta_changed": jobs.pipeline-builder.outputs.component_ComponentA
+    }
 
-      - name: "Build Solution"
-        run: dotnet build ./src/workflow-sandbox.sln -v n --no-restore
 
-      - name: "Run tests"
-        run: dotnet test ./src/workflow-sandbox.sln -v n --no-build
+  test-job:
+    needs: pipeline-builder
+    name: "Validate builder results"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Test"
+        shell: python
+        run: |
+          print(${{ needs.pipeline-builder.outputs }})
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-results
-          path: |
-            bin/Debug
-            !bin/Debug/*.Tests
-          retention-days: 1
+
+  # job-1:
+  #   needs: "pipeline-builder"
+  #   if: jobs.pipeline-builder.outputs.core_changed == "True"
+  #   name: "My First Job"
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - uses: actions/setup-dotnet@v2
+  #       with:
+  #         dotnet-version: "6.x"
+
+  #     - uses: actions/cache@v3
+  #       with:
+  #         path: ~/.nuget/packages
+  #         # Look to see if there is a cache hit for the corresponding requirements file
+  #         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-nuget
+
+  #     - name: "Restore packages"
+  #       run: dotnet restore ./src/workflow-sandbox.sln -v n
+
+  #     - name: "Build Solution"
+  #       run: dotnet build ./src/workflow-sandbox.sln -v n --no-restore
+
+  #     - name: "Run tests"
+  #       run: dotnet test ./src/workflow-sandbox.sln -v n --no-build
+
+  #     - name: Archive production artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: build-results
+  #         path: |
+  #           bin/Debug
+  #           !bin/Debug/*.Tests
+  #         retention-days: 1
+
