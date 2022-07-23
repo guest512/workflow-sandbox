@@ -35,5 +35,5 @@ jobs:
         with:
           name: build-results
           path: |
-            bin/Release
-          retentrion-days: 1
+            bin/Debug
+          retention-days: 1
