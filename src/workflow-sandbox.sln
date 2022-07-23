@@ -49,7 +49,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentB.LibraryA.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentB.LibraryB.Tests", "ComponentB\tests\ComponentB.LibraryB.Tests\ComponentB.LibraryB.Tests.csproj", "{3D4F476C-4259-48E2-A721-F38C1B6039A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.LibraryB.Tests", "Core\Tests\Core.LibraryB.Tests\Core.LibraryB.Tests.csproj", "{9B1A2EA9-88A3-4FC5-8187-A4DC612E0075}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.LibraryB.Tests", "Core\tests\Core.LibraryB.Tests\Core.LibraryB.Tests.csproj", "{9B1A2EA9-88A3-4FC5-8187-A4DC612E0075}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.LibraryA.Tests", "Core\tests\Core.LibraryA.Tests\Core.LibraryA.Tests.csproj", "{FFBB6FAA-3803-4E78-BCA5-2E21BE2F7C50}"
 EndProject
