@@ -43,7 +43,8 @@ jobs:
       - name: "Test"
         shell: python
         run: |
-          print(${{ needs.pipeline-builder.outputs }})
+          print(${{ needs.pipeline-builder.outputs.core_changed }})
+          print(${{ needs.pipeline-builder.outputs.componenta_changed }})
 
 
   # job-1:
