@@ -36,4 +36,5 @@ jobs:
           name: build-results
           path: |
             bin/Debug
+            !bin/Debug/*.Tests
           retention-days: 1
