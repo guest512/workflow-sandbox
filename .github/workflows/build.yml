@@ -16,14 +16,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
+
       - name: "Check the differences"
         shell: pwsh
         # Give an id to the step, so we can reference it later
         id: check_file_changed
         run: |
           # Diff HEAD with the previous commit
-          $diff = git diff --name-only HEAD~1..HEAD
+          $diff = git diff --name-only HEAD^..HEAD
 
           # Check if a file under component name folder changed
           $SourceDiff = $diff | Where-Object { $_ -match '^src/${{ matrix.component_name }}/'}
@@ -32,10 +32,11 @@ jobs:
           # Set the output named "docs_changed"
           Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
 
-    outputs: 
+    outputs:
       core_changed: ${{ steps.check_file_changed.outputs.component_Core }}
-      componenta_changed: ${{ steps.check_file_changed.outputs.component_ComponentA }}
-    
+      component_a_changed: ${{ steps.check_file_changed.outputs.component_ComponentA }}
+      component_b_changed: ${{ steps.check_file_changed.outputs.component_ComponentB }}
+
 
 
   test-job:
@@ -47,7 +48,8 @@ jobs:
         shell: python
         run: |
           print(${{ needs.pipeline-builder.outputs.core_changed }})
-          print(${{ needs.pipeline-builder.outputs.componenta_changed }})
+          print(${{ needs.pipeline-builder.outputs.component_a_changed }})
+          print(${{ needs.pipeline-builder.outputs.component_b_changed }})
 
 
   # job-1:
