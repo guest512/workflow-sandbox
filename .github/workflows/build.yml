@@ -22,13 +22,13 @@ jobs:
             ${{ runner.os }}-nuget
 
       - name: "Restore packages"
-        run: dotnet restore ./src/workflow-sandbox.sln -v n
+        run: dotnet restore ./src/workflow-sandbox.sln -v n -r linux-64
 
       - name: "Build Solution"
-        run: dotnet build ./src/workflow-sandbox.sln -v n --no-restore
+        run: dotnet build ./src/workflow-sandbox.sln -v n --no-restore -r linux-64
 
       - name: "Run tests"
-        run: dotnet test ./src/workflow-sandbox.sln -v n --no-build
+        run: dotnet test ./src/workflow-sandbox.sln -v n --no-build -r linux-64
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
@@ -36,3 +36,4 @@ jobs:
           name: build-results
           path: |
             bin/Release
+          retentrion-days: 1
