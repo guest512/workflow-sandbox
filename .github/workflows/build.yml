@@ -13,6 +13,10 @@ jobs:
       matrix:
         component_name: ["Core", "ComponentA", "ComponentB"]
     steps:
+      - uses: actions/checkout@v3
+        with:
+          depth-fetch: 0
+          
       - name: "Check the differences"
         shell: pwsh
         # Give an id to the step, so we can reference it later
