@@ -29,8 +29,8 @@ jobs:
           Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
 
     outputs: 
-      core_changed: ${{ jobs.pipeline-builder.outputs.component_Core }}
-      componenta_changed: ${{ jobs.pipeline-builder.outputs.component_ComponentA }}
+      core_changed: ${{ steps.check_file_changed.outputs.component_Core }}
+      componenta_changed: ${{ steps.check_file_changed.outputs.component_ComponentA }}
     
 
 
