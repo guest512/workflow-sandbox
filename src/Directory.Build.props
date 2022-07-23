@@ -1,7 +1,8 @@
 <Project>
     <PropertyGroup>
       <TargetFramework>net6.0</TargetFramework>
-      <RuntimeIdentifiers>win10-x64;linux-x64</RuntimeIdentifiers>
+      <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+      <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
 
       <IsPackable>false</IsPackable>
       <IsPublishable>false</IsPublishable>
