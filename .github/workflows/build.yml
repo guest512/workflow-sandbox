@@ -28,11 +28,10 @@ jobs:
           # Set the output named "docs_changed"
           Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
 
-    outputs:
-    {
-      "core_changed": jobs.pipeline-builder.outputs.component_Core,
-      "componenta_changed": jobs.pipeline-builder.outputs.component_ComponentA
-    }
+    outputs: 
+      core_changed: ${{ jobs.pipeline-builder.outputs.component_Core }}
+      componenta_changed: ${{ jobs.pipeline-builder.outputs.component_ComponentA }}
+    
 
 
   test-job:
