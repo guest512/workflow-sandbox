@@ -30,8 +30,11 @@ jobs:
           $HasDiff = $SourceDiff.Length -gt 0
 
           # Set the output named "docs_changed"
+          Write-Host $HasDiff
           Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
           Write-Host "::set-output name=number::7"
+          Write-Host ${{ matrix.component_name }}
+          Write-Host "${{ matrix.component_name }}"
 
     outputs:
       core_changed: ${{ steps.check_file_changed.outputs.component_Core }}
