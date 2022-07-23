@@ -1,0 +1,24 @@
+<Project>
+    <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+      <RuntimeIdentifiers>win10-x64;linux-x64</RuntimeIdentifiers>
+
+      <IsPackable>false</IsPackable>
+      <IsPublishable>false</IsPublishable>
+      <Deterministic>true</Deterministic>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+      <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)../tmp/$(Configuration)/obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+      <OutputPath>$(MSBuildThisFileDirectory)../bin/$(Configuration)/$(MSBuildProjectName)/</OutputPath>
+      <DocumentationFile>$(OurputPath)/$(MSBuildProjectName).xml</DocumentationFile>
+      <PublishDir>$(MSBuildThisFileDirectory)../out/$(RuntimeIdentifier)/$(Configuration)/$(MSBuildProjectName)/</PublishDir>
+
+      <NoWarn>$(NoWarn);1591</NoWarn>
+
+      <PublishReadyToRun>true</PublishReadyToRun>
+      <PublishSingleFile>true</PublishSingleFile>
+      <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+      <PublishReadyToRunEmitSymbols>true</PublishReadyToRunEmitSymbols>
+      <SelfContained>true</SelfContained>
+    </PropertyGroup>
+</Project>

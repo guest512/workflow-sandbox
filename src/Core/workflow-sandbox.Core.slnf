@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "..\\workflow-sandbox.sln",
+    "projects": [
+      "Core\\Tests\\Core.LibraryB.Tests\\Core.LibraryB.Tests.csproj",
+      "Core\\src\\Core.LibraryA\\Core.LibraryA.csproj",
+      "Core\\src\\Core.LibraryB\\Core.LibraryB.csproj",
+      "Core\\tests\\Core.LibraryA.Tests\\Core.LibraryA.Tests.csproj"
+    ]
+  }
+}
