@@ -31,13 +31,14 @@ jobs:
 
           # Set the output named "docs_changed"
           Write-Host "::set-output name=component_${{ matrix.component_name}}}::$HasDiff"
+          Write-Host "::set-output name=number::7"
 
     outputs:
       core_changed: ${{ steps.check_file_changed.outputs.component_Core }}
       component_a_changed: ${{ steps.check_file_changed.outputs.component_ComponentA }}
       component_b_changed: ${{ steps.check_file_changed.outputs.component_ComponentB }}
       component_c_changed: "True"
-      step_output: ${{ steps.check_file_changed.outputs }}
+      step_output: ${{ steps.check_file_changed.outputs.number }}
 
   test-job:
     needs: pipeline-builder
