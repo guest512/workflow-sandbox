@@ -37,6 +37,7 @@ jobs:
       component_a_changed: ${{ steps.check_file_changed.outputs.component_ComponentA }}
       component_b_changed: ${{ steps.check_file_changed.outputs.component_ComponentB }}
       component_c_changed: "True"
+      step_output: ${{ steps.check_file_changed.outputs }}
 
   test-job:
     needs: pipeline-builder
@@ -50,6 +51,7 @@ jobs:
           print(${{ needs.pipeline-builder.outputs.component_a_changed }})
           print(${{ needs.pipeline-builder.outputs.component_b_changed }})
           print(${{ needs.pipeline-builder.outputs.component_c_changed }})
+          print(${{ needs.pipeline-builder.outputs.step_output }})
 
   # job-1:
   #   needs: "pipeline-builder"
