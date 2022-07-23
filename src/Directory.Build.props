@@ -11,7 +11,7 @@
 
       <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)../tmp/$(Configuration)/obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
       <OutputPath>$(MSBuildThisFileDirectory)../bin/$(Configuration)/$(MSBuildProjectName)/</OutputPath>
-      <DocumentationFile>$(OurputPath)/$(MSBuildProjectName).xml</DocumentationFile>
+      <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
       <PublishDir>$(MSBuildThisFileDirectory)../out/$(RuntimeIdentifier)/$(Configuration)/$(MSBuildProjectName)/</PublishDir>
 
       <NoWarn>$(NoWarn);1591</NoWarn>
